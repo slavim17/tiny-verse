@@ -11,7 +11,7 @@ cmake_minimum_required(VERSION 3.5)
 set(FRONTEND "tinyc")
 set(OPTIMIZER "dummy")
 set(BACKEND "dummy")
-set(TARGET "secd")
+set(TARGET "dummy")
 
 # Pass the above selection to C++ compiler as macros
 add_compile_definitions(FRONTEND=${FRONTEND})
