@@ -1,0 +1,11 @@
+#pragma once
+
+namespace tiny {
+    class DummyBackend {
+    public:
+        template<typename T>
+        T to_target(T && il) {
+            return il;
+        }
+    }; 
+}

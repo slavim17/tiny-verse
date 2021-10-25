@@ -1,0 +1,11 @@
+#pragma once
+
+namespace tiny {
+    /** The dummy optimizer just provides the optimized() function that can be used with any intermediate representation and does nothing to it. 
+     */
+    class DummyOptimizer {
+    public:
+        template<typename T>
+        void optimize(T & il) { }
+    }; 
+}

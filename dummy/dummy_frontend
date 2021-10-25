@@ -1,0 +1,6 @@
+#pragma once
+#error "Dummy frontend makes no sense and cannot be used"
+
+namespace tiny {
+    
+}
