@@ -1,8 +1,9 @@
 #pragma once
 
+#include "common/helpers.h"
+
 #define MODULE(KIND, HEADER_FILE) MODULE_(KIND, HEADER_FILE)
-#define MODULE_(KIND, HEADER_FILE) TO_STRING_(KIND ## _ ## HEADER_FILE)
-#define TO_STRING_(X) #X
+#define MODULE_(KIND, HEADER_FILE) STRINGIFY_(KIND ## _ ## HEADER_FILE)
 
 #include MODULE(FRONTEND, frontend)
 #include MODULE(OPTIMIZER, optimizer)
@@ -27,7 +28,7 @@ void repl() {
     Target target;
 
     auto ast = frontend.parse("This will be the source code");
-    auto il = frontend.to_il(std::move(ast));
+    auto il = frontend.compileToIl(std::move(ast));
     optimizer.optimize(il);
     auto obj = backend.to_target(std::move(il));
     target.execute(std::move(obj));
