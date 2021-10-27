@@ -4,7 +4,7 @@ namespace tiny {
     class dummy_backend {
     public:
         template<typename T>
-        T to_target(T && il) {
+        T compileToTarget(T && il) {
             return il;
         }
     }; 
