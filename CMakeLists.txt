@@ -32,13 +32,22 @@ add_compile_definitions("OPTIMIZER_${OPTIMIZER}")
 add_compile_definitions("BACKEND_${BACKEND}")
 add_compile_definitions("TARGET_${TARGET}")
 
+# make sure common is always added as even we need it
+set(TINY_MODULES "common;${TINY_MODULES}")
 # We always need the common library which is part of this project (for now at least). Furthermore the dummy modules are added to include path to make sure their definitions are accessible in the same way the other modules are. 
-set(TINY_LIBRARIES "libcommon")
-include_directories("${CMAKE_SOURCE_DIR};${CMAKE_SOURCE_DIR}/common;${CMAKE_SOURCE_DIR}/dummy")
-add_subdirectory(common)
+set(TINY_LIBRARIES "")
+include_directories("${CMAKE_SOURCE_DIR};${CMAKE_SOURCE_DIR}/dummy")
 
-# first include all module directories
+
+# first include all module directories and if the modules are not present clone them
 foreach(MODULE IN LISTS TINY_MODULES)
+    if(NOT IS_DIRECTORY "${CMAKE_SOURCE_DIR}/${MODULE}")
+        message("Module ${MODULE} not found - cloning...")
+        execute_process(
+            COMMAND git clone "git@github.com:tiny-verse/${MODULE}"
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        )
+    endif()
     include_directories("${CMAKE_SOURCE_DIR}/${MODULE}")
 endforeach()
 
@@ -46,9 +55,6 @@ foreach(MODULE IN LISTS TINY_MODULES)
     message("Configuring module ${MODULE}")
     add_subdirectory("${MODULE}")
 endforeach()
-
-
-
 
 # Let's be clear about what we are building...
 message("tiny modules:")
