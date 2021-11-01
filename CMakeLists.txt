@@ -47,6 +47,14 @@ foreach(MODULE IN LISTS TINY_MODULES)
             COMMAND git clone "git@github.com:tiny-verse/${MODULE}"
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
+    else()
+        if (DEFINED UPDATE)
+            message("Module ${MODULE} found -- updating...")
+            execute_process(
+                COMMAND git pull "git@github.com:tiny-verse/${MODULE}"
+                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/${MODULE}"
+            )
+        endif()
     endif()
     include_directories("${CMAKE_SOURCE_DIR}/${MODULE}")
 endforeach()
