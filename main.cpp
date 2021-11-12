@@ -111,6 +111,8 @@ void compile() {
         printErrorLocationFromFile(config.input(), e.location());
     } catch (std::exception const & e) {
         std::cout << color::lightRed << "! " << e.what() << std::endl;
+    } catch (char const * e) {
+        std::cout << color::lightRed << "!str: " << e << std::endl;
     }
 }
 
