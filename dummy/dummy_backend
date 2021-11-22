@@ -5,7 +5,7 @@ namespace tiny {
     public:
         template<typename T>
         T compileToTarget(T && il) {
-            return std::move(il);
+            return std::forward<T>(il);
         }
     }; 
 }
