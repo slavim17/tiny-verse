@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(FRONTEND "tinyc")
 set(OPTIMIZER "tvlm")
 set(BACKEND "tvlm")
-set(TARGET "dummy")
+set(TARGET "t86")
 
 # Projects that will be built as part of the repl/compiler executable
 #
